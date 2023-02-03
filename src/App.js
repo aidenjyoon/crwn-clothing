@@ -1,36 +1,38 @@
-import Card from "./components/Card/Card.component";
+import Directory from "./components/Directory/Directory.component";
 
+import "./categories.styles.scss";
 const categories = [
   {
     id: 1,
-    title: "Hat",
+    title: "hats",
+    imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
   },
   {
     id: 2,
-    title: "Jackets",
+    title: "jackets",
+    imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
   },
   {
     id: 3,
-    title: "Sneakers",
+    title: "sneakers",
+    imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
   },
   {
     id: 4,
-    title: "Womens",
+    title: "womens",
+    imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
   },
   {
     id: 5,
-    title: "Mens",
+    title: "mens",
+    imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
   },
 ];
 
 function App() {
   return (
     <>
-      <div className="categories-container">
-        {categories.map((category) => {
-          return <Card category={category.title} />;
-        })}
-      </div>
+      <Directory categories={categories} />
     </>
   );
 }
