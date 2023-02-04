@@ -1,4 +1,11 @@
+<<<<<<< Updated upstream
 import Directory from "./components/Directory/Directory.component";
+=======
+import Home from "./routes/home/Home.component";
+import NavigationBar from "./routes/navigation/Navigation.component";
+import SignIn from "./routes/sign-in/SignIn.component";
+import { Routes, Route, Outlet } from "react-router-dom";
+>>>>>>> Stashed changes
 
 const categories = [
   {
@@ -31,7 +38,17 @@ const categories = [
 function App() {
   return (
     <>
+<<<<<<< Updated upstream
       <Directory categories={categories} />
+=======
+      <Routes>
+        <Route path="/" element={<NavigationBar />}>
+          <Route index element={<Home />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/sign-in" element={<SignIn />} />
+        </Route>
+      </Routes>
+>>>>>>> Stashed changes
     </>
   );
 }
