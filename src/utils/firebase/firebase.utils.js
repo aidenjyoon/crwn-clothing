@@ -21,17 +21,25 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 
-const provider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
 
-provider.setCustomParameters({
+googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
 
+// steps:
+// if user data does not exist
+//// create/set the document with the data from userAuth in my collection
+// if user data exists
+//// return userDocRef
 export const createUserDocumentFromAuth = async (userAuth) => {
   const userDocRef = doc(db, "users", userAuth.uid);
 
@@ -53,9 +61,4 @@ export const createUserDocumentFromAuth = async (userAuth) => {
       console.log("There was an error creating the user.", error.message);
     }
   }
-
-  // if user data does not exist
-  //// create/set the document with the data from userAuth in my collection
-  // if user data exists
-  //// return userDocRef
 };
