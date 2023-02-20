@@ -80,7 +80,10 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 };
 
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
-  if (!email || !password) return;
+  if (!email || !password) {
+    console.error("wrong email or password");
+    return;
+  }
 
-  return await signInWithEmailAndPassword(email, password);
+  return await signInWithEmailAndPassword(auth, email, password);
 };
