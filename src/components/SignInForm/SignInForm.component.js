@@ -52,7 +52,16 @@ const SignInForm = () => {
       console.log(response);
       resetFormFields();
     } catch (error) {
-      console.error("There has been a problem signing in.", error);
+      switch (error.code) {
+        case "auth/user-not-found":
+          alert("User with entered email does not exist.");
+          break;
+        case "auth/wrong-password":
+          alert("Password is not correct.");
+          break;
+        default:
+          console.error("There has been a problem signing in.", error);
+      }
     }
   };
 
