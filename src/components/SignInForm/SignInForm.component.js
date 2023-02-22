@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import {
   auth,
   signInWithGooglePopup,
@@ -10,8 +10,6 @@ import { getRedirectResult } from "firebase/auth";
 import Button from "../Button/Button.component";
 import FormInput from "../FormInput/FormInput.component";
 
-import { UserContext } from "../../contexts/user.context";
-
 import "./SignInForm.styles.scss";
 
 const defaultForms = {
@@ -21,15 +19,12 @@ const defaultForms = {
 
 // google popup signin function
 const SignInWithGoogle = async () => {
-  const { user } = await signInWithGooglePopup();
-  await createUserDocumentFromAuth(user);
+  await signInWithGooglePopup();
 };
 
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultForms);
   const { email, password } = formFields;
-
-  const { setCurrentUser } = useContext(UserContext);
 
   const resetFormFields = () => {
     setFormFields(defaultForms);
@@ -53,8 +48,6 @@ const SignInForm = () => {
         email,
         password
       );
-
-      setCurrentUser(user);
 
       resetFormFields();
     } catch (error) {
@@ -96,7 +89,11 @@ const SignInForm = () => {
 
           <div className="buttons__container">
             <Button type="submit">Sign In</Button>
-            <Button buttonType="google" onClick={SignInWithGoogle}>
+            <Button
+              buttonType="google"
+              type="button"
+              onClick={SignInWithGoogle}
+            >
               Google Sign In
             </Button>
           </div>

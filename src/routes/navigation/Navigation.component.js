@@ -8,12 +8,11 @@ import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 
 import "./Navigation.styles.scss";
 const NavigationBar = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
 
   const handleSignOut = async () => {
     try {
       await signOutUser();
-      setCurrentUser(null); // to reset the currentUser navbar
     } catch (error) {
       console.error("Failed to Sign Out.", error);
     }
