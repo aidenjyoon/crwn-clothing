@@ -17,17 +17,17 @@ const defaultForms = {
   password: "",
 };
 
-// google popup signin function
-const SignInWithGoogle = async () => {
-  await signInWithGooglePopup();
-};
-
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultForms);
   const { email, password } = formFields;
 
   const resetFormFields = () => {
     setFormFields(defaultForms);
+  };
+
+  // google popup signin function
+  const SignInWithGoogle = async () => {
+    await signInWithGooglePopup();
   };
 
   // handle when user types in email & password
@@ -44,10 +44,7 @@ const SignInForm = () => {
     const { email, password } = formFields;
 
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      await signInAuthUserWithEmailAndPassword(email, password);
 
       resetFormFields();
     } catch (error) {
