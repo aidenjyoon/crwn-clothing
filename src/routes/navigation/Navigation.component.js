@@ -1,9 +1,24 @@
+import { useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
+
+import { UserContext } from "../../contexts/user.context";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 
 import "./Navigation.styles.scss";
 const NavigationBar = () => {
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
+  const handleSignOut = async () => {
+    try {
+      await signOutUser();
+      setCurrentUser(null); // to reset the currentUser navbar
+    } catch (error) {
+      console.error("Failed to Sign Out.", error);
+    }
+  };
+
   return (
     <>
       <div className="navigation">
@@ -14,9 +29,15 @@ const NavigationBar = () => {
           <Link className="nav_link" to="/shop">
             SHOP
           </Link>
-          <Link className="nav_link" to="/auth">
-            SIGN IN
-          </Link>
+          {currentUser ? (
+            <span className="nav_link" onClick={handleSignOut}>
+              SIGN OUT
+            </span>
+          ) : (
+            <Link className="nav_link" to="/auth">
+              SIGN IN
+            </Link>
+          )}
         </div>
       </div>
       <Outlet />
