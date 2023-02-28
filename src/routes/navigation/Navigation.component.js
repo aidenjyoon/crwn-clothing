@@ -5,8 +5,11 @@ import { UserContext } from "../../contexts/user.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
+import CartIcon from "../../components/CartIcon/CartIcon.component";
 
 import "./Navigation.styles.scss";
+import CartDropdown from "../../components/CartDropdown/CartDropdown.component";
+
 const NavigationBar = () => {
   const { currentUser } = useContext(UserContext);
 
@@ -37,7 +40,9 @@ const NavigationBar = () => {
               SIGN IN
             </Link>
           )}
+          <CartIcon />
         </div>
+        <CartDropdown />
       </div>
       <Outlet />
     </>

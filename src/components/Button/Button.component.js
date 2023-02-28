@@ -11,6 +11,7 @@ const Button = ({ children, buttonType, ...otherProps }) => {
     <>
       <button
         className={`button__container ${BUTTON_TYPE_CLASSES[buttonType]} `}
+        {...otherProps}
       >
         {children}
       </button>
