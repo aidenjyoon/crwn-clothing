@@ -6,7 +6,7 @@ const CartDropdown = () => {
     <>
       <div className="cart_dropdown__container">
         <div className="cart_items">
-          <Button>Go to Checkout</Button>
+          <Button>GO TO CHECKOUT</Button>
         </div>
       </div>
     </>
