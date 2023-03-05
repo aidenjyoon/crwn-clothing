@@ -5,10 +5,15 @@ const addCartItem = (cartItems, productToAdd) => {
   // if so, modify quantity
   // else, add to cartItem and return the new array.
 
-  if (cartItems.find((cItem) => cItem.id === productToAdd.id)) {
+  // will return the cartItem object that matches to the productToAdd.id and undefined otherwise.
+
+  const cartItem = cartItems.find((cItem) => cItem.id === productToAdd.id);
+
+  if (cartItem) {
     // const product = {...productToAdd, quantity: cItem.quantity + 1}
     // cartItems.push(product)
     // TODO: find a way to point to the object in cartItems array to increase that object's quantity.
+    cartItem.quantity += 1;
   } else {
     const product = { ...productToAdd, quantity: 1 };
     cartItems.push(product);
