@@ -9,7 +9,7 @@ import { CartDropdownContext } from "../../contexts/cartDropdown.context";
 
 const CartDropdown = () => {
   const { cartItems } = useContext(CartDropdownContext);
-
+  console.log("cartItems: ", cartItems);
   return (
     <>
       <div className="cart_dropdown__container">
