@@ -1,22 +1,22 @@
 import { createContext, useState } from "react";
 
 const addCartItem = (cartItems, productToAdd) => {
-  // find if cartItem contains productToAdd
-  // if so, modify quantity
-  // else, add to cartItem and return the new array.
+  // finds product in cart if it exists.
+  const existingCartItem = cartItems.find(
+    (cItem) => cItem.id === productToAdd.id
+  );
 
-  // will return the cartItem object that matches to the productToAdd.id and undefined otherwise.
-
-  const cartItem = cartItems.find((cItem) => cItem.id === productToAdd.id);
-
-  if (cartItem) {
-    // const product = {...productToAdd, quantity: cItem.quantity + 1}
-    // cartItems.push(product)
-    // TODO: find a way to point to the object in cartItems array to increase that object's quantity.
-    cartItem.quantity += 1;
+  // maps through the cartItems to pinpoint the item to increase quantity by 1
+  // if it's not the correct cart item, return the item as is.
+  if (existingCartItem) {
+    return cartItems.map((cItem) =>
+      cItem.id === productToAdd.id
+        ? { ...cItem, quantity: cItem.quantity + 1 }
+        : cItem
+    );
   } else {
-    const product = { ...productToAdd, quantity: 1 };
-    cartItems.push(product);
+    // creates and returns a new array with new cartItem with 'quantity' parameter.
+    return [...cartItems, { ...productToAdd, quantity: 1 }];
   }
 };
 
