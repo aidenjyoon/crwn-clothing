@@ -12,11 +12,13 @@ const CartIcon = () => {
     setIsCartOpen(!isCartOpen);
   };
 
+  const { totalNumberItems } = useContext(CartDropdownContext);
+
   return (
     <>
       <div className="cart_icon__container" onClick={toggleIsCartOpen}>
         <ShoppingIcon className="shopping_icon" />
-        <span className="item_count">0</span>
+        <span className="item_count">{totalNumberItems}</span>
       </div>
     </>
   );

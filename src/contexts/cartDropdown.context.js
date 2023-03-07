@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 // helper function of addItemToCart
 const addCartItem = (cartItems, productToAdd) => {
@@ -26,17 +26,34 @@ export const CartDropdownContext = createContext({
   setIsCartOpen: () => null,
   cartItems: [],
   addItemToCart: () => null,
+  totalNumberItems: 0,
 });
 
 export const CartDropdownProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [totalNumberItems, setTotalNumberItems] = useState(0);
+
+  useEffect(() => {
+    // going through cartItems to add up quantity.
+    const newCartCount = cartItems.reduce(
+      (total, cartItem) => total + cartItem.quantity,
+      0 // starting value
+    );
+    setTotalNumberItems(newCartCount);
+  }, [cartItems]);
 
   const addItemToCart = (productToAdd) => {
     setCartItems(addCartItem(cartItems, productToAdd));
   };
 
-  const value = { isCartOpen, setIsCartOpen, cartItems, addItemToCart };
+  const value = {
+    isCartOpen,
+    setIsCartOpen,
+    cartItems,
+    addItemToCart,
+    totalNumberItems,
+  };
 
   return (
     <CartDropdownContext.Provider value={value}>
