@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 
+// helper function of addItemToCart
 const addCartItem = (cartItems, productToAdd) => {
   // finds product in cart if it exists.
   const existingCartItem = cartItems.find(
