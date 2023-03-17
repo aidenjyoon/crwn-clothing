@@ -1,7 +1,7 @@
 import "./ProductCard.styles.scss";
 
 import { useContext } from "react";
-import { CartDropdownContext } from "../../contexts/cartDropdown.context";
+import { CartContext } from "../../contexts/cart.context";
 
 import Button from "../Button/Button.component";
 
@@ -9,7 +9,7 @@ const ProductCard = (props) => {
   const { product } = props;
   const { id, name, price, imageUrl } = product;
 
-  const { addItemToCart } = useContext(CartDropdownContext);
+  const { addItemToCart } = useContext(CartContext);
 
   const addProductToCart = () => addItemToCart(product);
 
