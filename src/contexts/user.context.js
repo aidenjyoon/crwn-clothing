@@ -21,7 +21,6 @@ export const UserProvider = ({ children }) => {
         // as long as it's a valid user, createUserDocumnetFromAuth will verify whether or not it's a new user or not.
         createUserDocumentFromAuth(user);
       }
-      console.log(user);
       setCurrentUser(user); // either null or signed-in user
     });
     return unsubscribe;

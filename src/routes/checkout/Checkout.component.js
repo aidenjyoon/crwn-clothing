@@ -26,13 +26,12 @@ const Checkout = () => {
             <span>Remove</span>
           </div>
         </div>
-      </div>
 
-      <h1>checkout page</h1>
-      {cartItems.map((cItem) => {
-        return <CheckoutItem key={cItem.id} cartitem={cItem} />;
-      })}
-      {/* {cartItems.map((cItem) => {
+        <h1>checkout page</h1>
+        {cartItems.map((cItem) => {
+          return <CheckoutItem key={cItem.id} cartItem={cItem} />;
+        })}
+        {/* {cartItems.map((cItem) => {
         const { id, name, imageUrl, price, quantity } = cItem;
         return (
           <div key={id}>
@@ -46,7 +45,8 @@ const Checkout = () => {
         );
       })} */}
 
-      <span className="total">Total: 0</span>
+        <span className="total">Total: 0</span>
+      </div>
     </>
   );
 };
