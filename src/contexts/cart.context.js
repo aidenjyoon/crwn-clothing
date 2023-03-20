@@ -1,5 +1,15 @@
 import { createContext, useEffect, useState } from "react";
 
+const clearCartItem = (cartItems, cartItemToClear) => {
+  const existingCartItem = cartItems.find(
+    (cItem) => cItem.id === cartItemToClear.id
+  );
+
+  if (existingCartItem) {
+    return cartItems.filter((cItem) => cItem.id !== cartItemToClear.id);
+  }
+};
+
 const removeCartItem = (cartItems, cartItemToRemove) => {
   const existingCartItem = cartItems.find(
     (cItem) => cItem.id === cartItemToRemove.id
@@ -44,6 +54,7 @@ export const CartContext = createContext({
   cartItems: [],
   addItemToCart: () => null,
   removeItemFromCart: () => null,
+  clearItemFromCart: () => null,
   totalNumberItems: 0,
 });
 
@@ -69,12 +80,17 @@ export const CartProvider = ({ children }) => {
     setCartItems(removeCartItem(cartItems, cartItemToRemove));
   };
 
+  const clearItemFromCart = (cartItemToClear) => {
+    setCartItems(clearCartItem(cartItems, cartItemToClear));
+  };
+
   const value = {
     isCartOpen,
     setIsCartOpen,
     cartItems,
     addItemToCart,
     removeItemFromCart,
+    clearItemFromCart,
     totalNumberItems,
   };
 
