@@ -1,4 +1,8 @@
-import "./CartDropdown.styles.scss";
+import {
+  CartDropdownContainer,
+  CartItems,
+  EmptyMessage,
+} from "./CartDropdown.styles";
 
 import { useContext } from "react";
 
@@ -6,7 +10,7 @@ import Button from "../Button/Button.component";
 import CartItem from "../CartItem/CartItem.component";
 
 import { CartContext } from "../../contexts/cart.context";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CartDropdown = () => {
   const { cartItems } = useContext(CartContext);
@@ -18,18 +22,18 @@ const CartDropdown = () => {
   };
 
   return (
-    <>
-      <div className="cart_dropdown__container">
-        <div className="cart_items">
-          {cartItems.map((cItem) => {
+    <CartDropdownContainer id="CartDropdown__container">
+      <CartItems>
+        {cartItems.length ? (
+          cartItems.map((cItem) => {
             return <CartItem key={cItem.key} cartItem={cItem} />;
-          })}
-        </div>
-        <Link to="/checkout">
-          <Button onClick={navToCheckoutHandler}>GO TO CHECKOUT</Button>
-        </Link>
-      </div>
-    </>
+          })
+        ) : (
+          <EmptyMessage>Your cart is empty</EmptyMessage>
+        )}
+      </CartItems>
+      <Button onClick={navToCheckoutHandler}>GO TO CHECKOUT</Button>
+    </CartDropdownContainer>
   );
 };
 
