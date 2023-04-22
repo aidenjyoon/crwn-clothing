@@ -1,5 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 
+// HELPER FUNCTIONS //
+
 const clearCartItem = (cartItems, cartItemToClear) => {
   const existingCartItem = cartItems.find(
     (cItem) => cItem.id === cartItemToClear.id
@@ -47,6 +49,8 @@ const addCartItem = (cartItems, productToAdd) => {
   }
 };
 
+//////////////////////////
+
 // cartItems: {id, name, imageUrl, price, quantity}
 export const CartContext = createContext({
   isCartOpen: false,
@@ -65,6 +69,7 @@ export const CartProvider = ({ children }) => {
   const [totalNumberItems, setTotalNumberItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
 
+  // to count number of items
   useEffect(() => {
     // going through cartItems to add up quantity.
     const newCartCount = cartItems.reduce(
@@ -74,6 +79,7 @@ export const CartProvider = ({ children }) => {
     setTotalNumberItems(newCartCount);
   }, [cartItems]);
 
+  // to count total price
   useEffect(() => {
     const newTotalPrice = cartItems.reduce(
       (total, cartItems) => total + cartItems.price * cartItems.quantity,
