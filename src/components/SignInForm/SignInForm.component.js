@@ -1,16 +1,13 @@
 import { useState } from "react";
 import {
-  auth,
   signInWithGooglePopup,
-  signInWithGoogleRedirect,
-  createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
-import { getRedirectResult } from "firebase/auth";
+
 import Button, { BUTTON_TYPE_CLASSES } from "../Button/Button.component";
 import FormInput from "../FormInput/FormInput.component";
 
-import "./SignInForm.styles.scss";
+import { SignInContainer, ButtonsContainer } from "./SignInForm.styles";
 
 const defaultForms = {
   email: "",
@@ -63,7 +60,7 @@ const SignInForm = () => {
 
   return (
     <>
-      <div className="sign_in__container">
+      <SignInContainer id="SignInContainer">
         <h2>Sign-in Here</h2>
         <form onSubmit={handleSubmit}>
           <FormInput
@@ -84,7 +81,7 @@ const SignInForm = () => {
             value={password}
           />
 
-          <div className="buttons__container">
+          <ButtonsContainer id="ButtonsContainer">
             <Button type="submit">Sign In</Button>
             <Button
               buttonType={BUTTON_TYPE_CLASSES.google}
@@ -93,9 +90,9 @@ const SignInForm = () => {
             >
               Google Sign In
             </Button>
-          </div>
+          </ButtonsContainer>
         </form>
-      </div>
+      </SignInContainer>
     </>
   );
 };
