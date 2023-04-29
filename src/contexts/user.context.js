@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 import {
   onAuthStateChangedListener,
@@ -17,6 +17,8 @@ export const USER_ACTION_TYPES = {
 };
 
 const userReducer = (state, action) => {
+  console.log("dispatched");
+  console.log(action);
   const { type, payload } = action;
 
   switch (type) {

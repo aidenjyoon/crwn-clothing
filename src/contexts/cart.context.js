@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 
 // HELPER FUNCTIONS //
 
@@ -63,11 +63,71 @@ export const CartContext = createContext({
   totalPrice: 0,
 });
 
+export const CART_ACTION_TYPES = {
+  SET_IS_CART_OPEN: 'SET_IS_CART_OPEN',
+  ADD_ITEM_TO_CART: 'ADD_ITEM_TO_CART',
+  REMOVE_ITEM_FROM_CART: 'REMOVE_ITEM_FROM_CART',
+  CLEAR_ITEM_FROM_CART: 'CLEAR_ITEM_FROM_CART'
+}
+
+const cartReducer = (state, action) => {
+  const { type, payload } = action;
+  
+  switch(type) {
+    case CART_ACTION_TYPES.SET_IS_CART_OPEN:
+      return {
+        ...state,
+        isCartOpen: payload
+      }
+    case CART_ACTION_TYPES.ADD_ITEM_TO_CART:
+      return {
+        ...state,
+        cartItems: payload
+      }
+    case CART_ACTION_TYPES.REMOVE_ITEM_FROM_CART:
+      return {
+        ...state,
+        cartItems: payload
+      }
+    case CART_ACTION_TYPES.CLEAR_ITEM_FROM_CART:
+      return {
+        ...state,
+        cartItems: payload
+      }
+    default:
+      throw new Error(`Unhandled type ${type} in cartReducer`)
+  }
+
+};
+
+const INTITAL_STATE = {
+  isCartOpen: false,
+  cartItems: [],
+  totalNumberItems: 0,
+  totalPrice: 0,
+}
+
 export const CartProvider = ({ children }) => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const [totalNumberItems, setTotalNumberItems] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
+  // const [isCartOpen, setIsCartOpen] = useState(false);
+  // const [cartItems, setCartItems] = useState([]);
+  // const [totalNumberItems, setTotalNumberItems] = useState(0);
+  // const [totalPrice, setTotalPrice] = useState(0);
+
+  const [state, dispatch] = useReducer(cartReducer, INTITAL_STATE);
+  const {isCartOpen, cartItems, totalNumberItems, totalPrice} = state;
+
+  const setIsCartOpen = (isCartOpen) => {
+    dispatch({type: CART_ACTION_TYPES.SET_IS_CART_OPEN, payload: !isCartOpen})
+  }
+
+  const setCartItem = (fn) => {
+    
+    dispatch({type: CART_ACTION_TYPES.ADD_ITEM_TO_CART, payload: addCartItem(cItems, productToAdd)})
+  }
+
+  const removeCartItem
+
+  
 
   // to count number of items
   useEffect(() => {
