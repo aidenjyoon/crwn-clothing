@@ -3,4 +3,10 @@ import logger from "redux-logger";
 
 import { rootReducer } from "./root-reducer";
 
-export const store = configureStore(rootReducer)
+const middleWares = [logger];
+
+const composedEnhancers = compose(applyMiddleware(...middleWares));
+
+// holds the state, and when a new action arrives runs the dispatch -> middleware -> reducers pipeline,
+// and notifies subscribers when the state is replaced by a new one.
+export const store = configureStore(rootReducer, undefined, composedEnhancers);
