@@ -1,4 +1,6 @@
-import { compose, createStore, applyMiddleware } from "redux";
+import { compose, configureStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
 
-// root reducer
+import { rootReducer } from "./root-reducer";
+
+export const store = configureStore(rootReducer)
